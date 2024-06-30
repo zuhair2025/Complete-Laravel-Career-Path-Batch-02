@@ -1,88 +1,103 @@
 <?php
 
-$allIncomes = [];
+use App\Expense;
+use App\Income;
+use App\Savings;
 
-function showMenu()
-{
-    echo "1. Add income\n";
-    echo "2. Add expense\n";
-    echo "3. View incomes\n";
-    echo "4. View expenses\n";
-    echo "5. View savings\n";
-    echo "6. View categories\n";
-    
-    echo "Enter your option:";
-    
-    fscanf(STDIN,"%d",$choice);
+require 'vendor/autoload.php';
 
-    execute($choice);
-}
-echo showMenu();
-function setIncome($income)
-{
-    $a = file_get_contents("income.txt");
-    global $allIncomes;
-    array_push($allIncomes, $income);
-    file_put_contents("income.txt",$allIncomes);
-    var_dump($allIncomes);
-    // getIncome($allIncomes);
-}
 
-function getIncome($income)
-{
-    $j = $income;
-    return $income;
-}
-function execute($choice)
-{
-    while(true){
 
-        if($choice == 1)
-        {
-            echo "\nEnter Your Income: ";
-            fscanf(STDIN,"%s\n",$income);
-            setIncome($income);
+Class CliApp{
+      
+    private $income;
+    private $expense;
+    private $savings;
 
-            showMenu();
-        }
-    
-        if($choice == 2)
-        {
-            echo "\nEnter Your Expense: ";
-            fscanf(STDIN,"%d\n",$expense);
-            printf("Your Expense: %d\n\n",$expense);
-            showMenu();
-        }
-
-        if($choice == 3)
-        {
-            $myfile = file_get_contents("income.txt");
-            echo "\nYour Incomes: ".$myfile."\n\n";
-            showMenu();
-        }
-
-        if($choice == 4)
-        {
-            echo "\nYour Expenses: \n\n";
-            showMenu();
-        }
-
-        if($choice == 5)
-        {
-            echo "\nYour Savings: \n\n";
-            showMenu();
-        }
-
-        if($choice == 6)
-        {
-            echo "\nCategories: \n\n";
-            showMenu();
-        }
-
-        if($choice == 7)
-        {
-            return 0;
-        }
-    
+    public function __construct($income,$expense,$savings)
+    {
+        $this->income = $income;
+        $this->expense = $expense;
+        $this->savings = $savings;
     }
+
+    function showMenu()
+    {
+        echo "1. Add income\n";
+        echo "2. Add expense\n";
+        echo "3. View incomes\n";
+        echo "4. View expenses\n";
+        echo "5. View savings\n";
+        echo "6. View categories\n";
+        echo "7. Exit the program\n";
+        
+        echo "\nEnter your option:";
+        
+        fscanf(STDIN,"%d",$choice);
+
+        $this->execute($choice);
+    }
+
+
+    function execute($choice)
+    {
+        if($choice == 7){
+            exit;
+        }
+
+        while(true){
+            if($choice == 1)
+            {
+                $this->income->getIncome();
+            }
+            elseif($choice == 2)
+            {
+                $this->expense->getExpense();
+            }
+            elseif($choice == 3)
+            {
+                $this->income->showIncome();
+            }
+            elseif($choice == 4)
+            {
+                $this->expense->showExpense();
+            }
+            elseif($choice == 5)
+            {
+                $this->savings->savings();
+            }
+
+            elseif($choice == 6)
+            {
+                echo "\nCategories: \n\n";
+                echo "Name:Sallary  Type: Income\n";
+                echo "Name:Business  Type: Income\n";
+                echo "Name:Gift  Type: Income\n";
+                echo "Name:Food  Type: Expense\n";
+                echo "Name:House Rent  Type: Expense\n";
+                echo "Name:Medicine  Type: Expense\n\n";
+            }else{
+                echo "\n\n!!!!Invalid Option!!!!\n\n";
+            }
+
+            
+            $this->showMenu();
+        
+        }
+    }
+
 }
+
+$income = new Income();
+$expense = new Expense();
+$savings = new Savings();
+
+$cliapp = new CliApp($income,$expense,$savings);
+
+echo $cliapp->showMenu();
+
+
+
+
+
+
