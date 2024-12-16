@@ -14,7 +14,7 @@ class VaccineCenterSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('vaccine_centers')->insert(
+        DB::table('vaccine_centers')->insert([
             [
                 'name' => 'VC-001',
                 'daily_limit' => '10',
@@ -35,6 +35,6 @@ class VaccineCenterSeeder extends Seeder
                 'name' => 'VC-005',
                 'daily_limit' => '10',
             ]
-    );
+        ]);
     }
 }

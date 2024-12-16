@@ -30,6 +30,17 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <div class="mt-4">
+            <x-input-label for="center" :value="__('Vaccine Center')" />
+            <select id="center" name="center" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
+                <option value="" disabled selected>{{ __('Select a Vaccine Center') }}</option>
+                @foreach ($vaccineCenters as $vaccineCenter)
+                    <option value="{{$vaccineCenter->id}}">{{$vaccineCenter->name}}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('center')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />

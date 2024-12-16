@@ -21,8 +21,8 @@ class RegisteredUserController extends Controller
     public function create()
     {
         $vaccineCenters = VaccineCenter::all();
-        return $vaccineCenters;
-        return view('auth.register');
+
+        return view('auth.register',compact('vaccineCenters'));
 
     }
 
@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'nid' => $request->nid,
             'phone' => $request->phone,
+            'vaccine_center_id' => $request->vaccine_center_id,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

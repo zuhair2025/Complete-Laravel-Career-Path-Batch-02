@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nid')->unique();
             $table->string('phone')->unique();
             $table->string('email')->unique();
+            $table->string('vaccine_center_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

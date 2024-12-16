@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'nid',
         'phone',
+        'vaccine_center_id',
         'email',
         'password',
     ];
