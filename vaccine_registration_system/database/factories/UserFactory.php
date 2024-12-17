@@ -26,6 +26,10 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'nid' => str_pad(random_int(0, 99999999999999), 14, '0', STR_PAD_LEFT),
+            'phone' => '01' . random_int(100000000, 999999999),
+            'vaccine_center_id' => 3,
+            'vaccine_status' => 'not vaccinated',
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
